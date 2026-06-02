@@ -24,7 +24,7 @@ class LLMSummaryGenerator implements SummaryGeneratorInterface
     public function __construct(
         private readonly RulesBasedSummaryGenerator $fallback,
         private readonly string $apiKey = '',
-        private readonly string $model = 'meta-llama/llama-3.1-8b-instruct:free',
+        private readonly string $model = 'nvidia/nemotron-3-super-120b-a12b:free',
         private readonly string $baseUrl = 'https://openrouter.ai/api/v1/chat/completions',
         private readonly string $siteUrl = '',
         private readonly string $siteTitle = 'Issue Tracker',
