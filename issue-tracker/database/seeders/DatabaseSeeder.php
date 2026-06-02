@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Jobs\GenerateSummaryJob;
 use App\Models\Comment;
 use App\Models\Issue;
 use Illuminate\Database\Seeder;
@@ -53,6 +54,7 @@ class DatabaseSeeder extends Seeder
             $data['summary_status'] = 'pending';
             $data['needs_attention'] = $data['priority'] === 'high';
             $issue = Issue::create($data);
+            GenerateSummaryJob::dispatch($issue);
 
             // Seed comments for the first 4 issues
             if ($issue->id <= 4) {
