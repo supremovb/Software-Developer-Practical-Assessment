@@ -6,6 +6,7 @@ use App\Contracts\SummaryGeneratorInterface;
 use App\Models\Issue;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 /**
@@ -32,8 +33,15 @@ class LLMSummaryGenerator implements SummaryGeneratorInterface
     public function generate(Issue $issue): array
     {
         if (empty($this->apiKey)) {
+            Log::info('[SummaryGenerator] No API key — using rules-based fallback', ['issue_id' => $issue->id]);
             return $this->fallback->generate($issue);
         }
+
+        Log::info('[SummaryGenerator] Calling LLM', [
+            'issue_id' => $issue->id,
+            'model'    => $this->model,
+            'url'      => $this->baseUrl,
+        ]);
 
         try {
             $prompt = $this->buildPrompt($issue);
@@ -69,6 +77,11 @@ class LLMSummaryGenerator implements SummaryGeneratorInterface
                 ]);
 
             if ($response->failed()) {
+                Log::warning('[SummaryGenerator] LLM request failed — using rules-based fallback', [
+                    'issue_id' => $issue->id,
+                    'status'   => $response->status(),
+                    'body'     => $response->body(),
+                ]);
                 return $this->fallback->generate($issue);
             }
 
@@ -80,14 +93,24 @@ class LLMSummaryGenerator implements SummaryGeneratorInterface
                 || empty($decoded['summary'])
                 || empty($decoded['suggested_next_action'])
             ) {
+                Log::warning('[SummaryGenerator] LLM returned invalid JSON — using rules-based fallback', [
+                    'issue_id' => $issue->id,
+                    'content'  => $content,
+                ]);
                 return $this->fallback->generate($issue);
             }
+
+            Log::info('[SummaryGenerator] LLM success', ['issue_id' => $issue->id]);
 
             return [
                 'summary'               => trim($decoded['summary']),
                 'suggested_next_action' => trim($decoded['suggested_next_action']),
             ];
-        } catch (ConnectionException) {
+        } catch (ConnectionException $e) {
+            Log::warning('[SummaryGenerator] LLM connection error — using rules-based fallback', [
+                'issue_id' => $issue->id,
+                'error'    => $e->getMessage(),
+            ]);
             return $this->fallback->generate($issue);
         }
     }

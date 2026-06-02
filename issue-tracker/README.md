@@ -77,7 +77,7 @@ DB_PASSWORD=your_password_here
 > Without a key, the built-in rules-based generator runs automatically.
 > ```env
 > OPENROUTER_API_KEY=sk-or-v1-...
-> OPENROUTER_MODEL=meta-llama/llama-3.1-8b-instruct:free
+> OPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free
 > ```
 > Get a free key at https://openrouter.ai/keys
 
@@ -232,7 +232,7 @@ curl -X POST http://localhost:8000/api/v1/issues/1/comments \
 
 `SummaryGeneratorInterface` defines a single `generate(Issue): array` contract. Two implementations exist:
 
-- **`LLMSummaryGenerator`** — calls the OpenRouter API (OpenAI-compatible) and asks for a JSON response containing `summary` and `suggested_next_action`. Automatically delegates to `RulesBasedSummaryGenerator` when the API key is absent, the request fails, or the response is not valid JSON. Free models (e.g. `meta-llama/llama-3.1-8b-instruct:free`) work with no credits required.
+- **`LLMSummaryGenerator`** — calls the OpenRouter API (OpenAI-compatible) and asks for a JSON response containing `summary` and `suggested_next_action`. Automatically delegates to `RulesBasedSummaryGenerator` when the API key is absent, the request fails, or the response is not valid JSON. Free models (e.g. `nvidia/nemotron-3-super-120b-a12b:free`) work with no credits required.
 - **`RulesBasedSummaryGenerator`** — fully deterministic. Matches ~20 keywords from the issue title and description to infer the best next action, and uses the issue category to build the summary sentence. Works with zero external dependencies.
 
 This means the app is fully functional out of the box without an OpenAI key.
