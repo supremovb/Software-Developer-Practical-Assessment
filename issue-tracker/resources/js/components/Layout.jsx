@@ -3,33 +3,36 @@ import { Link, useLocation } from 'react-router-dom';
 
 export default function Layout({ children }) {
     const location = useLocation();
+    const isHome = location.pathname === '/';
 
     return (
-        <div className="min-h-screen bg-gray-50 font-sans">
+        <div className="min-h-screen bg-slate-50 font-sans flex flex-col">
             {/* Top nav */}
-            <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-16">
-                        <Link to="/" className="flex items-center gap-2.5">
-                            {/* Bug/ticket icon */}
-                            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white text-sm font-bold">
+            <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6">
+                    <div className="flex items-center justify-between h-14 sm:h-16">
+                        {/* Logo */}
+                        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+                            <span className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 text-white text-xs font-bold shadow-sm shadow-indigo-200 select-none">
                                 IT
                             </span>
-                            <span className="text-lg font-semibold text-gray-900 hidden sm:block">
+                            <span className="text-base font-semibold text-slate-800 hidden sm:block tracking-tight">
                                 Issue Tracker
                             </span>
                         </Link>
 
-                        <div className="flex items-center gap-3">
-                            {location.pathname !== '/' && (
+                        {/* Right side actions */}
+                        <div className="flex items-center gap-2">
+                            {!isHome && (
                                 <Link
                                     to="/"
-                                    className="text-sm text-gray-500 hover:text-gray-900 flex items-center gap-1 transition-colors"
+                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
                                 >
                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
-                                    All Issues
+                                    <span className="hidden sm:inline">All Issues</span>
+                                    <span className="sm:hidden">Back</span>
                                 </Link>
                             )}
                         </div>
@@ -38,15 +41,16 @@ export default function Layout({ children }) {
             </nav>
 
             {/* Main content */}
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
                 {children}
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-gray-200 bg-white mt-auto">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <p className="text-xs text-gray-400 text-center">
-                        Issue Tracker — Smart Summary System
+            <footer className="border-t border-slate-200 bg-white mt-auto">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-center gap-2">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-md bg-gradient-to-br from-indigo-500 to-indigo-700 text-white text-[9px] font-bold">IT</span>
+                    <p className="text-xs text-slate-400">
+                        Issue Tracker · Smart Summary System
                     </p>
                 </div>
             </footer>

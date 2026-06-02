@@ -3,8 +3,8 @@ import { issues as issuesApi } from '../api/client';
 
 const CATEGORIES = ['billing', 'auth', 'performance', 'bug', 'feature', 'deployment', 'data', 'security'];
 
-const LABEL = 'block text-sm font-medium text-gray-700 mb-1';
-const INPUT = 'block w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-900 shadow-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400';
+const LABEL = 'block text-sm font-semibold text-slate-700 mb-1.5';
+const INPUT = 'block w-full rounded-xl border border-slate-200 px-3.5 py-2.5 text-sm text-slate-900 bg-white shadow-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition placeholder-slate-400';
 
 function FieldError({ errors, name }) {
     const msg = errors?.[name]?.[0];
@@ -111,14 +111,14 @@ export default function IssueForm({ onCreated, onCancel }) {
                 <button
                     type="button"
                     onClick={onCancel}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition"
+                    className="px-4 py-2.5 text-sm font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition"
                 >
                     Cancel
                 </button>
                 <button
                     type="submit"
                     disabled={submitting}
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition"
+                    className="px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm shadow-indigo-200 transition active:scale-95"
                 >
                     {submitting ? 'Creating…' : 'Create Issue'}
                 </button>
