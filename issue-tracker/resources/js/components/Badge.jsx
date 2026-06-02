@@ -37,7 +37,7 @@ const SUMMARY_STYLES = {
 };
 
 const SUMMARY_LABELS = {
-    pending: 'Generating…',
+    pending: 'Generating...',
     ready:   'AI Ready',
     failed:  'Failed',
 };

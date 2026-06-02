@@ -66,7 +66,7 @@ export default function IssueForm({ onCreated, onCancel }) {
                         rows={4}
                         value={form.description}
                         onChange={set('description')}
-                        placeholder="Detailed description of the issue…"
+                        placeholder="Detailed description of the issue..."
                         className={INPUT + ' resize-none'}
                     />
                     <FieldError errors={errors} name="description" />
@@ -120,7 +120,7 @@ export default function IssueForm({ onCreated, onCancel }) {
                     disabled={submitting}
                     className="px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-60 disabled:cursor-not-allowed shadow-sm shadow-indigo-200 transition active:scale-95"
                 >
-                    {submitting ? 'Creating…' : 'Create Issue'}
+                    {submitting ? 'Creating...' : 'Create Issue'}
                 </button>
             </div>
         </form>

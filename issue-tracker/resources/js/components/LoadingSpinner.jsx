@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LoadingSpinner({ label = 'Loading…' }) {
+export default function LoadingSpinner({ label = 'Loading...' }) {
     return (
         <div className="space-y-3 py-4">
             {[1, 2, 3].map((n) => (

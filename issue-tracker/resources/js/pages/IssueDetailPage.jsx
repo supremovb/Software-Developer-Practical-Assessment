@@ -76,7 +76,7 @@ function AddCommentForm({ issueId, onAdded }) {
                 <div>
                     <textarea
                         rows={3}
-                        placeholder="Write a commentâ€¦"
+                        placeholder="Write a comment..."
                         value={form.body}
                         onChange={(e) => setForm((f) => ({ ...f, body: e.target.value }))}
                         className={INPUT + ' resize-none'}
@@ -90,7 +90,7 @@ function AddCommentForm({ issueId, onAdded }) {
                     disabled={submitting}
                     className="px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-60 transition shadow-sm shadow-indigo-200 active:scale-95"
                 >
-                    {submitting ? 'Postingâ€¦' : 'Post Comment'}
+                    {submitting ? 'Posting...' : 'Post Comment'}
                 </button>
             </div>
         </form>
@@ -169,7 +169,7 @@ function EditIssuePanel({ issue, onUpdated, onCancel }) {
                     Cancel
                 </button>
                 <button type="submit" disabled={submitting} className="px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 disabled:opacity-60 transition shadow-sm shadow-indigo-200 active:scale-95 w-full sm:w-auto">
-                    {submitting ? 'Savingâ€¦' : 'Save Changes'}
+                    {submitting ? 'Saving...' : 'Save Changes'}
                 </button>
             </div>
         </form>
@@ -323,7 +323,7 @@ export default function IssueDetailPage() {
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                                             </svg>
-                                            <p className="text-sm">Generating summary in the backgroundâ€¦</p>
+                                            <p className="text-sm">Generating summary in the background...</p>
                                         </div>
                                     ) : (
                                         <div className="flex items-center gap-2 text-red-500">
