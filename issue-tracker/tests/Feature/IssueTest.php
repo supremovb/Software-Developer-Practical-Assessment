@@ -191,4 +191,23 @@ class IssueTest extends TestCase
 
         $response->assertStatus(422);
     }
+
+    // -------------------------------------------------------------------------
+    // needs_attention is cleared when a high-priority issue is resolved
+    // -------------------------------------------------------------------------
+    public function test_resolving_high_priority_issue_clears_needs_attention(): void
+    {
+        Queue::fake();
+
+        $issue = Issue::factory()->create(['priority' => 'high', 'status' => 'open']);
+        $this->assertTrue($issue->needs_attention);
+
+        $response = $this->patchJson("/api/v1/issues/{$issue->id}", ['status' => 'resolved']);
+
+        $response->assertStatus(200)
+            ->assertJsonFragment(['needs_attention' => false]);
+
+        $this->assertDatabaseHas('issues', ['id' => $issue->id, 'needs_attention' => false]);
+    }
 }
+

@@ -182,8 +182,8 @@ All endpoints are under `/api/v1`. JSON requests and responses throughout.
 | `priority` | `low`, `medium`, `high` | Filter by priority |
 | `category` | any string | Filter by category |
 | `needs_attention` | `1` | Show only high-priority open issues |
-| `sort` | `created_at`, `updated_at`, `priority`, `status` | Sort field (default: `created_at`) |
-| `direction` | `asc`, `desc` | Sort direction (default: `desc`) |
+| `sort_by` | `created_at`, `updated_at`, `priority`, `status` | Sort field (default: `created_at`) |
+| `sort_dir` | `asc`, `desc` | Sort direction (default: `desc`) |
 | `per_page` | integer | Results per page (default: 15) |
 
 ### Example curl calls

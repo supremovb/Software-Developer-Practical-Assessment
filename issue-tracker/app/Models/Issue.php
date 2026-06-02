@@ -34,7 +34,7 @@ class Issue extends Model
 
     public function recomputeNeedsAttention(): void
     {
-        $this->needs_attention = $this->priority === 'high';
+        $this->needs_attention = $this->priority === 'high' && $this->status !== 'resolved';
         $this->saveQuietly();
     }
 }

@@ -77,8 +77,8 @@ class IssueController extends Controller
 
         $issue->fill($data);
 
-        if (isset($data['priority'])) {
-            $issue->needs_attention = ($data['priority'] === 'high');
+        if (isset($data['priority']) || isset($data['status'])) {
+            $issue->needs_attention = ($issue->priority === 'high' && $issue->status !== 'resolved');
         }
 
         $issue->save();
